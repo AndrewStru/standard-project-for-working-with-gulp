@@ -1,4 +1,4 @@
-//@@include('alert.js')
+alert('Hello World');
 
 
 // Определяем поддержку webp браузером

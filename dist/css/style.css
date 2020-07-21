@@ -1,3 +1,21 @@
 body {
   font-size: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
+
+span {
+  font-size: 20px;
+}
+
+.no-webp div {
+  background: url("../img/img.jpg"); }
+
+@media (max-wight: 767px) {
+  span {
+    font-size: 15px;
+  }
+}
+
+.webp div { background: url(../img/img.webp); }

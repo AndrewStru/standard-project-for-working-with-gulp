@@ -1,16 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/style.min.css">
-	<title>Document</title>
+	@@include('_head.html')
 </head>
 <body>
-	@@include('_header.html')
+		@@include('_header.html')
+
 	<main class="main">
-		<img src="img/img.jpg" alt="">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 order-3 order-lg-1">
+					<div class="card mb-4">
+						<img src="img/author.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">About me</h5>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<a href="#" class="btn btn-success btn-block">Folow me</a>
+						</div>
+					</div>
+					<h3>Subscribe</h3>
+					<div class="block">
+						<form method="post" action="/">
+							<div class="form-group">
+								<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+								<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+							</div>
+							<button type="submit" class="btn btn-success btn-block">Subscribe</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-8 order-1 order-lg-2">
+					<div class="card mb-4">
+						<img src="img/photo-1.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">Post title</h5>
+							<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id deleniti tempore accusantium placeat, alias laudantium accusamus repellendus, qui eaque temporibus, expedita hic minus sequi. Laboriosam quibusdam illo nemo quae assumenda!</p>
+							<p class="text"><small class="text-muted">Last updates 3 mins ago</small></p>
+							<a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
+						</div>
+					</div>
+					<div class="card mb-4">
+						<img src="img/photo-2.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">Post title</h5>
+							<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id deleniti tempore accusantium placeat, alias laudantium accusamus repellendus, qui eaque temporibus, expedita hic minus sequi. Laboriosam quibusdam illo nemo quae assumenda!</p>
+							<p class="text"><small class="text-muted">Last updates 3 mins ago</small></p>
+							<a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
+						</div>
+					</div>
+					<div class="card mb-4">
+						<img src="img/photo-3.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">Post title</h5>
+							<p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id deleniti tempore accusantium placeat, alias laudantium accusamus repellendus, qui eaque temporibus, expedita hic minus sequi. Laboriosam quibusdam illo nemo quae assumenda!</p>
+							<p class="text"><small class="text-muted">Last updates 3 mins ago</small></p>
+							<a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
+						</div>
+					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="col-lg-3 col-md-4 order-2 order-lg-3">
+					<div class="list-group mb-4">
+						<a href="#" class="list-group-item list-group-item-action active">Section 1</a>
+						<a href="#" class="list-group-item list-group-item-action">Section 2</a>
+						<a href="#" class="list-group-item list-group-item-action">Section 3</a>
+						<a href="#" class="list-group-item list-group-item-action">Section 4</a>
+						<a href="#" class="list-group-item list-group-item-action">Section 5</a>
+					</div>
+					<h3>Meta tags</h3>
+					<div class="block">
+						<a class="badge badge-info" href="#">Travel</a>
+						<a class="badge badge-info" href="#">Info</a>
+						<a class="badge badge-info" href="#">Tickets</a>
+						<a class="badge badge-info" href="#">Photos</a>
+						<a class="badge badge-info" href="#">History</a>
+						<a class="badge badge-info" href="#">Weather</a>
+						<a class="badge badge-info" href="#">World</a>
+						<a class="badge badge-info" href="#">Nature</a>
+					</div>
+					<h3>Galery</h3>
+					<div class="block">
+						<div class="row no-gutters">
+							<div class="col-6">
+								<img class="img-fluid" src="img/gallery-1.jpg" alt="">
+							</div>
+							<div class="col-6">
+								<img class="img-fluid" src="img/gallery-2.jpg" alt="">
+							</div>
+							<div class="col-6">
+								<img class="img-fluid" src="img/gallery-3.jpg" alt="">
+							</div>
+							<div class="col-6">
+								<img class="img-fluid" src="img/gallery-4.jpg" alt="">
+							</div>
+							<div class="col-6">
+								<img class="img-fluid" src="img/gallery-5.jpg" alt="">
+							</div>
+							<div class="col-6">
+								<img class="img-fluid" src="img/gallery-6.jpg" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
-	<script src="js/script.min.js"></script>
+
+
+		@@include('_footer.html')
 </body>
 </html>

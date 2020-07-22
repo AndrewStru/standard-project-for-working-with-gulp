@@ -1,10 +1,12 @@
 
-let project_folder = "dist";
+// Rename build folder
+let project_folder = require('path').basename(__dirname);
+// Source folder
 let source_folder = "#src";
 
-let fonts2Style = require('fonts2Style'); 
+let fs = require('fs');
 
-/* пути к исходным файлам (src), к готовым файлам (build), а также к тем, за изменениями которых нужно наблюдать (watch) */
+/* paths to the source files (src), to the finished files (build), as well as to those whose changes need to be monitored (watch) */
 let path = {
 	build: {
 		html: project_folder + "/",
@@ -29,7 +31,7 @@ let path = {
 	clean: "./" + project_folder + "/"
 }
 
-/* подключаем gulp и плагины */
+/* connect gulp and plugins */
 let {src, dest,} = require('gulp'),
 	gulp = require('gulp'),
 	browsersync = require('browser-sync'),
@@ -48,9 +50,10 @@ let {src, dest,} = require('gulp'),
 	svgSprite = require('gulp-svg-sprite'),
 	ttf2woff = require('gulp-ttf2woff'),
 	ttf2woff2 = require('gulp-ttf2woff2'),
-	fonter = require('gulp-fonter');
+	fonter = require('gulp-fonter'),
+	rigger = require('gulp-rigger');
 
-// запуск сервера
+// Start server LocalHost
 function browserSync(params) {
 	browsersync.init({
 		server: {
@@ -61,7 +64,7 @@ function browserSync(params) {
 	})
 }
 
-// сбор html
+// Build html files
 function html() {
 	return src(path.src.html)
 		.pipe(fileinclude())
@@ -70,6 +73,7 @@ function html() {
 		.pipe(browsersync.stream())
 }
 
+// Build css files
 function css() {
 	return src(path.src.css)
 		.pipe(
@@ -98,9 +102,10 @@ function css() {
 		.pipe(browsersync.stream())
 }
 
+// Build JavaScript files
 function js() {
 	return src(path.src.js)
-		.pipe(fileinclude())
+		.pipe(rigger())
 		.pipe(dest(path.build.js))
 		.pipe(
 			uglify()
@@ -114,6 +119,7 @@ function js() {
 		.pipe(browsersync.stream())
 }
 
+// Convert images
 function images() {
 	return src(path.src.img)
 		.pipe(
@@ -127,7 +133,7 @@ function images() {
 			imagemin({
 				interlaced: true,
 				progressive: true,
-				optimizationLevel: 3, // от 0 до 7
+				optimizationLevel: 3, // from 0 to 7
 				svgoPlugins: [{removeViewBox: true}]
 			})
 		)
@@ -135,6 +141,7 @@ function images() {
 		.pipe(browsersync.stream())
 }
 
+// Build and convert fonts
 function fonts() {
 	src(path.src.fonts)
 		.pipe(ttf2woff())
@@ -152,14 +159,14 @@ gulp.task('otf2ttf', function() {
 		.pipe(dest(source_folder + '/fonts/'));
 })
 
-// Задача по сборке спрайтов svg (запускается отдельно)
+// The task of assembling svg sprites (runs separately)
 gulp.task('svgSprite', function() {
 	return gulp.src([source_folder + '/iconsprite/*.svg'])
 		.pipe(svgSprite({
 			mode: {
 				stack: {
-					sprite: "../icons/icons.svg", // Путь для сохранения файлов
-					example: true    // Можно создать HTML файл с примерами иконок
+					sprite: "../icons/icons.svg", // Path to save files
+					example: true    // You can create an HTML file with examples of icons
 				}
 			},
 		}
@@ -167,7 +174,8 @@ gulp.task('svgSprite', function() {
 	.pipe(dest(path.build.img))
 })
 
-function fonts2Style(params) {
+// function for connecting fonts to a .scss file
+function fontsStyle(params) {
 	let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
 	if (file_content == '') {
 		fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
@@ -191,7 +199,7 @@ function cb() {
 
 }
 
-// Наблюдение за изменениями в файлах
+// Monitoring file changes
 function watchFiles(params) {
 	gulp.watch([path.watch.html], html);
 	gulp.watch([path.watch.css], css);
@@ -199,19 +207,19 @@ function watchFiles(params) {
 	gulp.watch([path.watch.img], images);
 }
 
-// Очиста папки проекта
+// Clearing the project folder
 function clean(params) {
 	return del(path.clean);
 }
 
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), fonts2Style);
+let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), fontsStyle);
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.html = html;
 exports.css = css;
 exports.js = js;
-exports.fonts2Style = fonts2Style;
+exports.fontsStyle = fontsStyle;
 exports.images = images;
 exports.fonts = fonts;
 exports.build = build;
